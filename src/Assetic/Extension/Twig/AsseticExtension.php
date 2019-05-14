@@ -13,8 +13,11 @@ namespace Assetic\Extension\Twig;
 
 use Assetic\Factory\AssetFactory;
 use Assetic\ValueSupplierInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\Extension\GlobalsInterface;
+use Twig\TwigFunction;
 
-class AsseticExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class AsseticExtension extends AbstractExtension implements GlobalsInterface
 {
     protected $factory;
     protected $functions;
@@ -48,7 +51,7 @@ class AsseticExtension extends \Twig_Extension implements \Twig_Extension_Global
     {
         $functions = array();
         foreach ($this->functions as $function => $filter) {
-            $functions[] = new \Twig_SimpleFunction($function, null, array(
+            $functions[] = new TwigFunction($function, null, array(
                     'needs_environment' => false, 'needs_context' => false,
                     'node_class' => '\Assetic\Extension\Twig\AsseticFilterNode',
                 ));
